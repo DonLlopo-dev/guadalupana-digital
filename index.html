@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Send a Mass intention, roses or a veladora to the Basílica de Guadalupe from the US. Independent service, not affiliated with the Basílica.">
 <title>Guadalupana Digital</title>
+<!-- Share previews (Open Graph / X). Change SITE URL here when you get your own domain. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guadalupana Digital">
+<meta property="og:title" content="Guadalupana Digital · Your faith reaches Tepeyac">
+<meta property="og:description" content="Send a Mass intention, roses or a veladora to the Basílica de Guadalupe from the US. Independent service.">
+<meta property="og:url" content="https://donllopo-dev.github.io/guadalupana-digital/">
+<meta property="og:image" content="https://donllopo-dev.github.io/guadalupana-digital/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Guadalupana Digital: Your faith reaches Tepeyac">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_MX">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guadalupana Digital · Your faith reaches Tepeyac">
+<meta name="twitter:description" content="Mass intentions, roses and veladoras at the Basílica, sent from the US.">
+<meta name="twitter:image" content="https://donllopo-dev.github.io/guadalupana-digital/og-image.png">
+<meta name="theme-color" content="#1E656D">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -183,6 +201,48 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
 }
 @media (min-width: 721px) { footer { padding-bottom: 0; } }
 
+/* Photo slots: drop a file with the shown name into /img and it appears; until then a labelled frame shows */
+.photo { position: relative; margin: 0; border-radius: 12px; overflow: hidden; background: var(--gold-soft); border: 2px dashed var(--guadalupe-tez-morena); aspect-ratio: 4 / 3; max-width: 100%; display: grid; place-items: center; text-align: center; }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.photo figcaption { padding: 12px; font-size: 0.85rem; color: var(--muted); display: grid; gap: 4px; }
+.photo figcaption code { font-size: 0.78rem; color: var(--fg); background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+.photo.has-img { border: 0; }
+.photo.has-img figcaption { display: none; }
+.svc .photo { aspect-ratio: 16 / 9; max-width: 520px; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+/* Guadalupe 101 */
+.g101 { background: var(--surface); border-block: 1px solid var(--line); }
+.motto { display: grid; gap: 10px; padding: 28px; border-radius: 14px; background: var(--hero-bg); color: var(--hero-fg); }
+.motto blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 3rem); line-height: 1.1; color: var(--gold); text-wrap: balance; }
+.motto p { color: rgba(251,246,230,0.88); max-width: 60ch; }
+.g101grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 760px) { .g101grid { grid-template-columns: minmax(0, 1fr); } }
+.symbols { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.symbols li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+.symbols .sw { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line); margin-top: 2px; }
+.symbols b { display: block; }
+.symbols span.t { color: var(--muted); font-size: 0.95rem; }
+.g101 h3 { font-size: 1.6rem; }
+.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0; }
+.glossary div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); min-width: 0; }
+.glossary dt { font-weight: 700; }
+.glossary dd { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+.words { border-left: 4px solid var(--rose); padding: 4px 0 4px 18px; display: grid; gap: 6px; max-width: 62ch; }
+.words q { font-family: var(--font-display); font-size: 1.5rem; quotes: "«" "»"; }
+.words small { color: var(--muted); }
+
+/* Contact */
+.contact { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn-wa { background: var(--guadalupe-ala-verde); color: #ffffff; }
+.btn[aria-disabled="true"] { opacity: 0.6; cursor: not-allowed; }
+.phone { font-weight: 700; font-variant-numeric: tabular-nums; user-select: all; }
+
+/* Consent */
+.consent { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 0.92rem; font-weight: 400; }
+.consent input { width: 22px; height: 22px; min-height: 0; margin-top: 2px; flex: none; accent-color: var(--mantle); }
+footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
+
 @media (prefers-reduced-motion: no-preference) {
   .hero::before { animation: turn 120s linear infinite; }
   @keyframes turn { to { transform: rotate(360deg); } }
@@ -234,6 +294,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
         <div>
           <h3 data-i18n="massTitle"></h3>
           <p data-i18n="massText"></p>
+          <figure class="photo"><img src="img/servicio-misa.jpg" alt="" data-i18n-alt="photoMass" loading="lazy"><figcaption><span data-i18n="photoMass"></span><code>img/servicio-misa.jpg</code></figcaption></figure>
           <dl class="split">
             <dt data-i18n="offering"></dt><dd data-i18n="massOffering"></dd>
             <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
@@ -246,6 +307,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
         <div>
           <h3 data-i18n="flowersTitle"></h3>
           <p data-i18n="flowersText"></p>
+          <figure class="photo"><img src="img/servicio-rosas.jpg" alt="" data-i18n-alt="photoRoses" loading="lazy"><figcaption><span data-i18n="photoRoses"></span><code>img/servicio-rosas.jpg</code></figcaption></figure>
           <dl class="split">
             <dt data-i18n="flowersCost"></dt><dd data-i18n="tbd"></dd>
             <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
@@ -257,6 +319,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
         <div>
           <h3 data-i18n="candleTitle"></h3>
           <p data-i18n="candleText"></p>
+          <figure class="photo"><img src="img/servicio-veladora.jpg" alt="" data-i18n-alt="photoCandle" loading="lazy"><figcaption><span data-i18n="photoCandle"></span><code>img/servicio-veladora.jpg</code></figcaption></figure>
           <dl class="split">
             <dt data-i18n="candleCost"></dt><dd data-i18n="tbd"></dd>
             <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
@@ -326,6 +389,67 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
   </div>
 </section>
 
+<section class="block g101" id="guadalupe-101">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Guadalupe 101</span>
+      <h2 data-i18n="g101Title"></h2>
+      <p data-i18n="g101Lede"></p>
+    </div>
+    <div class="motto">
+      <blockquote lang="es">«El mexicano nace donde le da la gana»</blockquote>
+      <p data-i18n="mottoText"></p>
+    </div>
+    <div class="g101grid">
+      <div style="display:grid;gap:18px;min-width:0">
+        <h3 data-i18n="symTitle"></h3>
+        <ul class="symbols">
+          <li><span class="sw" style="background:var(--guadalupe-manto-turquesa)"></span><div><b data-i18n="sym1"></b><span class="t" data-i18n="sym1t"></span></div></li>
+          <li><span class="sw" style="background:var(--guadalupe-tunica-rosa)"></span><div><b data-i18n="sym2"></b><span class="t" data-i18n="sym2t"></span></div></li>
+          <li><span class="sw" style="background:var(--guadalupe-cinto-negro)"></span><div><b data-i18n="sym3"></b><span class="t" data-i18n="sym3t"></span></div></li>
+          <li><span class="sw" style="background:var(--guadalupe-oro-solar)"></span><div><b data-i18n="sym4"></b><span class="t" data-i18n="sym4t"></span></div></li>
+          <li><span class="sw" style="background:var(--guadalupe-luna-ceniza)"></span><div><b data-i18n="sym5"></b><span class="t" data-i18n="sym5t"></span></div></li>
+          <li><span class="sw" style="background:linear-gradient(90deg,var(--guadalupe-ala-verde) 0 33%,#ffffff 33% 66%,var(--guadalupe-ala-roja) 66%)"></span><div><b data-i18n="sym6"></b><span class="t" data-i18n="sym6t"></span></div></li>
+          <li><span class="sw" style="background:var(--guadalupe-tez-morena)"></span><div><b data-i18n="sym7"></b><span class="t" data-i18n="sym7t"></span></div></li>
+        </ul>
+        <p class="t" style="color:var(--muted);font-size:0.85rem" data-i18n="symNote"></p>
+      </div>
+      <figure class="photo" style="aspect-ratio:3/4"><img src="img/guadalupe-101.jpg" alt="" data-i18n-alt="photoG101" loading="lazy"><figcaption><span data-i18n="photoG101"></span><code>img/guadalupe-101.jpg</code></figcaption></figure>
+    </div>
+    <div class="words">
+      <q lang="es">¿No estoy yo aquí, que soy tu madre?</q>
+      <small data-i18n="wordsNote"></small>
+    </div>
+    <div style="display:grid;gap:14px">
+      <h3 data-i18n="gloTitle"></h3>
+      <dl class="glossary">
+        <div><dt>Tepeyac</dt><dd data-i18n="glo1"></dd></div>
+        <div><dt>Tilma</dt><dd data-i18n="glo2"></dd></div>
+        <div><dt>La Morenita</dt><dd data-i18n="glo3"></dd></div>
+        <div><dt>Veladora</dt><dd data-i18n="glo4"></dd></div>
+        <div><dt>Manda</dt><dd data-i18n="glo5"></dd></div>
+        <div><dt>Las Mañanitas</dt><dd data-i18n="glo6"></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tepeyac">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="galEyebrow"></span>
+      <h2 data-i18n="galTitle"></h2>
+      <p data-i18n="galLede"></p>
+    </div>
+    <div class="gallery">
+      <figure class="photo"><img src="img/tepeyac-1.jpg" alt="" data-i18n-alt="gal1" loading="lazy"><figcaption><span data-i18n="gal1"></span><code>img/tepeyac-1.jpg</code></figcaption></figure>
+      <figure class="photo"><img src="img/tepeyac-2.jpg" alt="" data-i18n-alt="gal2" loading="lazy"><figcaption><span data-i18n="gal2"></span><code>img/tepeyac-2.jpg</code></figcaption></figure>
+      <figure class="photo"><img src="img/tepeyac-3.jpg" alt="" data-i18n-alt="gal3" loading="lazy"><figcaption><span data-i18n="gal3"></span><code>img/tepeyac-3.jpg</code></figcaption></figure>
+      <figure class="photo"><img src="img/tepeyac-4.jpg" alt="" data-i18n-alt="gal4" loading="lazy"><figcaption><span data-i18n="gal4"></span><code>img/tepeyac-4.jpg</code></figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section class="block" id="request">
   <div class="wrap">
     <div class="head">
@@ -345,6 +469,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       <div class="field"><label for="for" data-i18n="fFor"></label><input id="for" data-i18n-ph="fForPh"></div>
       <div class="field"><label for="date" data-i18n="fDate"></label><input id="date" type="date"></div>
       <div class="field full"><label for="intent" data-i18n="fIntent"></label><textarea id="intent" data-i18n-ph="fIntentPh"></textarea></div>
+      <label class="consent" for="consent"><input type="checkbox" id="consent"><span data-i18n-html="fConsent"></span></label>
       <button class="btn btn-mantle" type="submit" data-i18n="fSubmit"></button>
       <p class="result" id="result" role="status"></p>
     </form>
@@ -366,16 +491,37 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
   </div>
 </section>
 
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="ctEyebrow"></span>
+      <h2 data-i18n="ctTitle"></h2>
+      <p data-i18n="ctLede"></p>
+    </div>
+    <div class="contact">
+      <a class="btn btn-wa" id="waContact" target="_blank" rel="noopener">WhatsApp</a>
+      <span class="phone" id="phoneText"></span>
+    </div>
+  </div>
+</section>
+
 <footer><div class="wrap">
   <strong>Guadalupana Digital</strong>
   <p data-i18n="footer"></p>
   <p data-i18n="proto"></p>
+  <nav><a href="#guadalupe-101">Guadalupe 101</a><a href="#contact" data-i18n="navContact"></a><a href="privacidad.html" data-i18n="navPrivacy"></a></nav>
 </div></footer>
 
 <div class="mobilecta"><a class="btn" href="#request" data-i18n="ctaRequest"></a></div>
 
 <script>
 (function () {
+  // ===== CONFIGURATION =====
+  // Your WhatsApp number in international format, digits only.
+  // Example for a US number: "13105551234". Example for Mexico: "5215512345678".
+  var WHATSAPP_NUMBER = "";
+  // ==========================
+
   var T = {
     en: {
       heroEyebrow: "Guadalupana Digital",
@@ -388,7 +534,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       indep: "<strong>Independent service.</strong> Guadalupana Digital is not part of, and is not affiliated with, the Basílica de Guadalupe. We pass the Basílica's offering on in full and only charge a fee for our service.",
       svcEyebrow: "Services",
       svcTitle: "Send your devotion to the Basílica",
-      svcLede: "For familias in the US who can't travel to CDMX. We handle the paperwork in person and send you photos as proof.",
+      svcLede: "For familias in the US who can't travel to CDMX. We're gestores: we do the paperwork in person on your behalf and send you photos as proof.",
       massTitle: "Mass intention",
       massText: "Your intention read at a Mass at the Basílica: a loved one who passed, a birthday, a healing, a thank-you.",
       offering: "Basílica offering (official rate)",
@@ -442,7 +588,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       q1: "Are you part of the Basílica de Guadalupe?",
       a1: "No. Guadalupana Digital is an independent service. We are not part of the Basílica or the Archdiocese of Mexico, and we don't speak for them.",
       q2: "What exactly do I pay for?",
-      a2: "Two things, shown separately: the Basílica's official offering, which we pass on in full, and our service fee for doing the paperwork in person, buying flowers or candles, and sending your photos.",
+      a2: "Two things, shown separately: the Basílica's official offering, which we pass on in full, and our fee as your gestores for doing the paperwork in person, buying flowers or candles, and sending your photos.",
       q3: "Can I do this myself?",
       a3: "Yes. The Basílica has its own offices and online channels at <a href=\"https://virgendeguadalupe.org.mx/\" target=\"_blank\" rel=\"noopener\">virgendeguadalupe.org.mx</a>. We exist for people who prefer to have someone handle it for them, in English or Spanish, with photo proof.",
       q4: "Is the Devotion Card an official certificate?",
@@ -458,7 +604,36 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       cardServiceDefault: "Mass intention",
       cardFoot1: "Guadalupana Digital",
       cardFoot2: "Independent service · not affiliated with the Basílica",
-      cardAlt: "Devotion Card preview"
+      cardAlt: "Devotion Card preview",
+      photoMass: "Photo: Mass at the Basílica", photoRoses: "Photo: roses at the Basílica", photoCandle: "Photo: lit veladora",
+      photoG101: "Photo: the image of Our Lady of Guadalupe (use your own photo or one you have rights to)",
+      g101Title: "La Morenita, explained",
+      g101Lede: "For everyone who grew up with her image at home but never got the full story. In English, con cariño.",
+      mottoText: "A Mexican saying for everyone born on this side of the border: being Mexican is something you carry, wherever you were born. And she is part of that.",
+      symTitle: "How to read her image",
+      sym1: "Turquoise mantle with stars", sym1t: "The stars on her mantle are traditionally read as the sky over Mexico.",
+      sym2: "Rose tunic with flowers", sym2t: "Covered in flowers, the language Juan Diego's people used for the sacred.",
+      sym3: "Black sash", sym3t: "Traditionally read as a sign that she is expecting a child.",
+      sym4: "Rays of the sun", sym4t: "She stands in front of the sun: the light surrounds her.",
+      sym5: "The moon under her feet", sym5t: "A dark crescent moon at her feet.",
+      sym6: "The angel's wings", sym6t: "An angel holds her mantle and robe. His wings carry green, white and red feathers.",
+      sym7: "Brown skin", sym7t: "That's why she is La Morenita: she looks like the people she came to.",
+      symNote: "These are traditional, popular readings of the image, not official Church definitions.",
+      wordsNote: "\"Am I not here, I who am your mother?\" Her words to Juan Diego, from the Nahuatl account known as the Nican Mopohua.",
+      gloTitle: "Words to know",
+      glo1: "The hill in the north of Mexico City where she appeared in 1531. The Basílica stands at its foot.",
+      glo2: "Juan Diego's cloak, made of plant fiber. Her image is on it.",
+      glo3: "\"The little brown one.\" The most loving way to call her.",
+      glo4: "A tall candle in a glass, lit for a petition or in thanks.",
+      glo5: "A promise made to her in exchange for a favor, like walking to the Basílica.",
+      glo6: "The birthday song. On the night of December 11 to 12, it is sung to her at the Basílica.",
+      galEyebrow: "From Tepeyac", galTitle: "Photos from the Basílica", galLede: "Real photos from our visits to the Basílica.",
+      gal1: "Photo: the Basílica from the atrium", gal2: "Photo: pilgrims arriving", gal3: "Photo: flowers left for La Virgen", gal4: "Photo: veladoras lit at Tepeyac",
+      fConsent: "I accept the <a href=\"privacidad.html\">privacy notice</a> and agree that my intention, which may reveal my religious beliefs or health information, is used to provide this service.",
+      fConsentNeed: "Please accept the privacy notice to continue.",
+      ctEyebrow: "Contact", ctTitle: "Talk to us on WhatsApp", ctLede: "Questions about a service, a date or a special intention? Write to us in English or Spanish.",
+      phoneSoon: "Phone number coming soon", waText: "Hi! I have a question about Guadalupana Digital.",
+      navContact: "Contact", navPrivacy: "Privacy notice"
     },
     es: {
       heroEyebrow: "Guadalupana Digital",
@@ -471,7 +646,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       indep: "<strong>Servicio independiente.</strong> Guadalupana Digital no forma parte de la Basílica de Guadalupe ni está afiliada a ella. Entregamos íntegra la ofrenda a la Basílica y solo cobramos una tarifa por nuestro servicio.",
       svcEyebrow: "Servicios",
       svcTitle: "Envía tu devoción a la Basílica",
-      svcLede: "Para familias en EE. UU. que no pueden viajar a la CDMX. Hacemos el trámite en persona y te enviamos fotos como prueba.",
+      svcLede: "Para familias en EE. UU. que no pueden viajar a la CDMX. Somos gestores: hacemos el trámite en persona a tu nombre y te enviamos fotos como prueba.",
       massTitle: "Intención de misa",
       massText: "Tu intención leída en una misa en la Basílica: un ser querido que partió, un cumpleaños, una sanación, un agradecimiento.",
       offering: "Ofrenda a la Basílica (tarifa oficial)",
@@ -525,7 +700,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       q1: "¿Son parte de la Basílica de Guadalupe?",
       a1: "No. Guadalupana Digital es un servicio independiente. No formamos parte de la Basílica ni de la Arquidiócesis de México, y no hablamos en su nombre.",
       q2: "¿Qué estoy pagando exactamente?",
-      a2: "Dos cosas, desglosadas: la ofrenda oficial a la Basílica, que entregamos íntegra, y nuestra tarifa por hacer el trámite en persona, comprar flores o veladoras y enviarte las fotos.",
+      a2: "Dos cosas, desglosadas: la ofrenda oficial a la Basílica, que entregamos íntegra, y nuestra tarifa como gestores por hacer el trámite en persona, comprar flores o veladoras y enviarte las fotos.",
       q3: "¿Puedo hacerlo yo mismo?",
       a3: "Sí. La Basílica tiene sus propias oficinas y canales en línea en <a href=\"https://virgendeguadalupe.org.mx/\" target=\"_blank\" rel=\"noopener\">virgendeguadalupe.org.mx</a>. Nosotros existimos para quien prefiere que alguien lo haga por él, en inglés o español y con prueba en fotos.",
       q4: "¿La Tarjeta de Devoción es un certificado oficial?",
@@ -541,7 +716,36 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       cardServiceDefault: "Intención de misa",
       cardFoot1: "Guadalupana Digital",
       cardFoot2: "Servicio independiente · sin afiliación con la Basílica",
-      cardAlt: "Vista previa de la Tarjeta de Devoción"
+      cardAlt: "Vista previa de la Tarjeta de Devoción",
+      photoMass: "Foto: misa en la Basílica", photoRoses: "Foto: rosas en la Basílica", photoCandle: "Foto: veladora encendida",
+      photoG101: "Foto: la imagen de la Virgen de Guadalupe (usa una foto propia o con derechos)",
+      g101Title: "La Morenita, explicada",
+      g101Lede: "Para quienes crecieron con su imagen en casa pero nunca les contaron toda la historia. En inglés y en español, con cariño.",
+      mottoText: "Un dicho mexicano para todos los que nacieron del otro lado de la frontera: ser mexicano es algo que se lleva dentro, nazcas donde nazcas. Y ella es parte de eso.",
+      symTitle: "Cómo leer su imagen",
+      sym1: "Manto turquesa con estrellas", sym1t: "Las estrellas de su manto se leen tradicionalmente como el cielo sobre México.",
+      sym2: "Túnica rosa con flores", sym2t: "Cubierta de flores, el lenguaje con el que el pueblo de Juan Diego hablaba de lo sagrado.",
+      sym3: "Cinta negra", sym3t: "Tradicionalmente se lee como señal de que está embarazada.",
+      sym4: "Rayos del sol", sym4t: "Está de pie frente al sol: la luz la rodea.",
+      sym5: "La luna a sus pies", sym5t: "Una luna creciente oscura bajo sus pies.",
+      sym6: "Las alas del ángel", sym6t: "Un ángel sostiene su manto y su túnica. Sus alas tienen plumas verdes, blancas y rojas.",
+      sym7: "Piel morena", sym7t: "Por eso es la Morenita: se parece al pueblo al que vino.",
+      symNote: "Son lecturas tradicionales y populares de la imagen, no definiciones oficiales de la Iglesia.",
+      wordsNote: "Sus palabras a Juan Diego, según el relato en náhuatl conocido como Nican Mopohua.",
+      gloTitle: "Palabras para saber",
+      glo1: "El cerro al norte de la Ciudad de México donde se apareció en 1531. La Basílica está a sus pies.",
+      glo2: "El manto de Juan Diego, hecho de fibra vegetal. En él está su imagen.",
+      glo3: "La forma más cariñosa de llamarla.",
+      glo4: "Una vela alta en vaso de vidrio que se enciende por una petición o en agradecimiento.",
+      glo5: "Una promesa que se le hace a cambio de un favor, como caminar hasta la Basílica.",
+      glo6: "La canción de cumpleaños. En la noche del 11 al 12 de diciembre se le canta en la Basílica.",
+      galEyebrow: "Desde el Tepeyac", galTitle: "Fotos desde la Basílica", galLede: "Fotos reales de nuestras visitas a la Basílica.",
+      gal1: "Foto: la Basílica desde el atrio", gal2: "Foto: peregrinos llegando", gal3: "Foto: flores para la Virgen", gal4: "Foto: veladoras encendidas en el Tepeyac",
+      fConsent: "Acepto el <a href=\"privacidad.html\">aviso de privacidad</a> y que mi intención, que puede revelar mis creencias religiosas o mi estado de salud, se use para prestar este servicio.",
+      fConsentNeed: "Acepta el aviso de privacidad para continuar.",
+      ctEyebrow: "Contacto", ctTitle: "Escríbenos por WhatsApp", ctLede: "¿Dudas sobre un servicio, una fecha o una intención especial? Escríbenos en español o en inglés.",
+      phoneSoon: "Número telefónico próximamente", waText: "¡Hola! Tengo una pregunta sobre Guadalupana Digital.",
+      navContact: "Contacto", navPrivacy: "Aviso de privacidad"
     }
   };
 
@@ -554,6 +758,8 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
     document.querySelectorAll("[data-i18n-html]").forEach(function (el) { el.innerHTML = t(el.getAttribute("data-i18n-html")); });
     document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { el.placeholder = t(el.getAttribute("data-i18n-ph")); });
+    document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.alt = t(el.getAttribute("data-i18n-alt")); });
+    renderContact();
     document.getElementById("btn-en").setAttribute("aria-pressed", lang === "en");
     document.getElementById("btn-es").setAttribute("aria-pressed", lang === "es");
     var text = encodeURIComponent(t("shareText"));
@@ -568,6 +774,27 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
       try { localStorage.setItem("gd-lang", lang); } catch (e) {}
       applyLang();
     });
+  });
+
+  function renderContact() {
+    var wa = document.getElementById("waContact"), ph = document.getElementById("phoneText");
+    if (WHATSAPP_NUMBER) {
+      wa.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(t("waText"));
+      wa.removeAttribute("aria-disabled");
+      ph.textContent = "+" + WHATSAPP_NUMBER;
+    } else {
+      wa.removeAttribute("href");
+      wa.setAttribute("aria-disabled", "true");
+      ph.textContent = t("phoneSoon");
+    }
+  }
+
+  // Photo slots: show the photo when the file exists, keep the labelled frame when it doesn't
+  document.querySelectorAll(".photo img").forEach(function (im) {
+    function ok() { im.closest(".photo").classList.add("has-img"); }
+    function bad() { im.remove(); }
+    if (im.complete) { im.naturalWidth ? ok() : bad(); }
+    else { im.addEventListener("load", ok); im.addEventListener("error", bad); }
   });
 
   function renderCountdown() {
@@ -693,6 +920,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
     e.preventDefault();
     var out = document.getElementById("result");
     if (!val("svc") || !val("name")) { out.classList.add("is-error"); out.textContent = t("fNeed"); return; }
+    if (!document.getElementById("consent").checked) { out.classList.add("is-error"); out.textContent = t("fConsentNeed"); return; }
     out.classList.remove("is-error");
     drawCard();
     out.textContent = t("fDone");
