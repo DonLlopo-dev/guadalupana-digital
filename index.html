@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Send a Mass intention, roses or a veladora to the Basílica de Guadalupe from the US. Independent service, not affiliated with the Basílica.">
 <title>Guadalupana Digital</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +41,9 @@
 }
 
 * { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; text-wrap: balance; margin: 0; }
@@ -166,7 +175,8 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
-
+</head>
+<body>
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="#top">Guadalupana <span>Digital</span></a>
@@ -677,3 +687,5 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawCard);
 })();
 </script>
+</body>
+</html>
