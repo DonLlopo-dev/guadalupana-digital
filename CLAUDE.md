@@ -22,6 +22,8 @@ entrega de rosas y veladoras para quien no puede viajar, y cobramos solo una tar
 ## Archivos
 - `index.html` — página única bilingüe EN/ES (textos en el objeto `T` del script; claves `data-i18n`).
   Config arriba del script: `var WHATSAPP_NUMBER = "";` (pendiente; formato internacional, solo dígitos).
+  También `var STORE_URLS = { mass, flowers, candle }`: enlace de la tienda por servicio (pendiente). Vacío = el botón
+  "Ir a la tienda" baja al formulario con el servicio ya elegido. Los servicios ya no muestran desglose de precios.
 - `privacidad.html` — aviso de privacidad EN/ES, BORRADOR con campos `[DATO]` pendientes; requiere abogado.
 - `og-image.png` (1200×630) + etiquetas Open Graph en `<head>`; `og:url` apunta a
   https://donllopo-dev.github.io/guadalupana-digital/ (cambiar si hay dominio propio).
@@ -51,6 +53,6 @@ Pendiente opcional: el texto dorado pequeño sobre turquesa tiene contraste bajo
 - Bendición de veladoras: lun–vie 12:15, Templo Expiatorio. Sacristía: sacristia@inbg.mx, 55 5118 0500 ext. 514/515.
 
 ## Pendientes
-Número de WhatsApp · más fotos (`img/`) · datos del aviso de privacidad + revisión legal · tarifas y política de
+Número de WhatsApp · enlaces de la tienda (`STORE_URLS`) · más fotos (`img/`) · datos del aviso de privacidad + revisión legal · tarifas y política de
 reembolso · formulario real (hoy es demo) · pagos (Stripe) · dominio propio · activar/decidir GitHub Pages ·
 posible campaña "Paquete 12 de diciembre".

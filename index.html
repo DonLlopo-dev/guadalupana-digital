@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: mobile-first single column; gold "resplandor" hero, service rows with transparent price split, a shareable Devotion Card, sticky bottom CTA on phones */
+/* Layout: mobile-first single column; gold "resplandor" hero, service rows with photo + shop button, a shareable Devotion Card, sticky bottom CTA on phones */
 /* Palette: Guadalupe — mantle turquoise, tunic rose, solar gold, black sash, ash moon, brown skin, angel's wings */
 :root {
   --guadalupe-manto-turquesa: #1E656D;
@@ -136,10 +136,9 @@ section.block .wrap { padding-block: 60px; display: grid; gap: 30px; }
 .svc > div { min-width: 0; display: grid; gap: 8px; }
 .svc h3 { font-size: 1.55rem; }
 .svc p { color: var(--muted); }
-.split { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; font-size: 0.92rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-variant-numeric: tabular-nums; }
-.split dt { color: var(--muted); }
-.split dd { margin: 0; font-weight: 600; text-align: right; }
-.split .src { grid-column: 1 / -1; font-size: 0.78rem; color: var(--muted); }
+.svc-media { display: grid; grid-template-columns: minmax(0, 520px) auto; gap: 16px; align-items: center; justify-content: start; }
+.btn-shop { background: var(--mantle); color: var(--mantle-ink); white-space: nowrap; gap: 8px; }
+@media (max-width: 640px) { .svc-media { grid-template-columns: minmax(0, 1fr); } .btn-shop { width: 100%; } }
 
 /* Steps */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; counter-reset: step; }
@@ -294,12 +293,10 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
         <div>
           <h3 data-i18n="massTitle"></h3>
           <p data-i18n="massText"></p>
-          <figure class="photo"><img src="img/servicio-misa.jpg" alt="" data-i18n-alt="photoMass" loading="lazy"><figcaption><span data-i18n="photoMass"></span><code>img/servicio-misa.jpg</code></figcaption></figure>
-          <dl class="split">
-            <dt data-i18n="offering"></dt><dd data-i18n="massOffering"></dd>
-            <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
-            <span class="src" data-i18n="massSrc"></span>
-          </dl>
+          <div class="svc-media">
+            <figure class="photo"><img src="img/servicio-misa.jpg" alt="" data-i18n-alt="photoMass" loading="lazy"><figcaption><span data-i18n="photoMass"></span><code>img/servicio-misa.jpg</code></figcaption></figure>
+            <a class="btn btn-shop" href="#request" data-store="mass"><span data-i18n="shopBtn"></span> <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </article>
       <article class="svc">
@@ -307,11 +304,10 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
         <div>
           <h3 data-i18n="flowersTitle"></h3>
           <p data-i18n="flowersText"></p>
-          <figure class="photo"><img src="img/servicio-rosas.jpg" alt="" data-i18n-alt="photoRoses" loading="lazy"><figcaption><span data-i18n="photoRoses"></span><code>img/servicio-rosas.jpg</code></figcaption></figure>
-          <dl class="split">
-            <dt data-i18n="flowersCost"></dt><dd data-i18n="tbd"></dd>
-            <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
-          </dl>
+          <div class="svc-media">
+            <figure class="photo"><img src="img/servicio-rosas.jpg" alt="" data-i18n-alt="photoRoses" loading="lazy"><figcaption><span data-i18n="photoRoses"></span><code>img/servicio-rosas.jpg</code></figcaption></figure>
+            <a class="btn btn-shop" href="#request" data-store="flowers"><span data-i18n="shopBtn"></span> <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </article>
       <article class="svc">
@@ -319,12 +315,10 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
         <div>
           <h3 data-i18n="candleTitle"></h3>
           <p data-i18n="candleText"></p>
-          <figure class="photo"><img src="img/servicio-veladora.jpg" alt="" data-i18n-alt="photoCandle" loading="lazy"><figcaption><span data-i18n="photoCandle"></span><code>img/servicio-veladora.jpg</code></figcaption></figure>
-          <dl class="split">
-            <dt data-i18n="candleCost"></dt><dd data-i18n="tbd"></dd>
-            <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
-            <span class="src" data-i18n="candleSrc"></span>
-          </dl>
+          <div class="svc-media">
+            <figure class="photo"><img src="img/servicio-veladora.jpg" alt="" data-i18n-alt="photoCandle" loading="lazy"><figcaption><span data-i18n="photoCandle"></span><code>img/servicio-veladora.jpg</code></figcaption></figure>
+            <a class="btn btn-shop" href="#request" data-store="candle"><span data-i18n="shopBtn"></span> <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </article>
     </div>
@@ -520,6 +514,9 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
   // Your WhatsApp number in international format, digits only.
   // Example for a US number: "13105551234". Example for Mexico: "5215512345678".
   var WHATSAPP_NUMBER = "";
+  // Shop link for each service (e.g. your Stripe, Shopify or Etsy page).
+  // While a link is empty, the button scrolls to the request form with that service already chosen.
+  var STORE_URLS = { mass: "", flowers: "", candle: "" };
   // ==========================
 
   var T = {
@@ -537,18 +534,10 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
       svcLede: "For familias in the US who can't travel to CDMX. We're gestores: we do the paperwork in person on your behalf and send you photos as proof.",
       massTitle: "Mass intention",
       massText: "Your intention read at a Mass at the Basílica: a loved one who passed, a birthday, a healing, a thank-you.",
-      offering: "Basílica offering (official rate)",
-      massOffering: "from $150 MXN",
-      fee: "Our service fee",
-      tbd: "To be defined",
-      massSrc: "Official rates from virgendeguadalupe.org.mx, checked Nov 6, 2026. Rates may change.",
       flowersTitle: "Roses for La Virgen",
       flowersText: "A bouquet of roses brought to the Basílica in your family's name, a nod to the roses Juan Diego carried in his tilma.",
-      flowersCost: "Flowers (bought locally)",
       candleTitle: "Veladora",
       candleText: "A veladora with the name you choose, for your petition, placed in the quematorio (the candle shrine) at Tepeyac. We send you the photo.",
-      candleCost: "Veladora (bought locally)",
-      candleSrc: "The official schedule lists a blessing of veladoras Monday to Friday at 12:15 at the Templo Expiatorio.",
       howEyebrow: "How it works",
       howTitle: "Four steps from your phone",
       s1t: "Choose a service", s1p: "Mass, roses or veladora. Add the name and your intention.",
@@ -605,6 +594,7 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
       cardFoot1: "Guadalupana Digital",
       cardFoot2: "Independent service · not affiliated with the Basílica",
       cardAlt: "Devotion Card preview",
+      shopBtn: "Go to the shop",
       photoMass: "Photo: Mass at the Basílica", photoRoses: "Photo: roses at the Basílica", photoCandle: "A lit veladora with a personal intention, at Tepeyac",
       photoG101: "Photo: the image of Our Lady of Guadalupe (use your own photo or one you have rights to)",
       g101Title: "La Morenita, explained",
@@ -649,18 +639,10 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
       svcLede: "Para familias en EE. UU. que no pueden viajar a la CDMX. Somos gestores: hacemos el trámite en persona a tu nombre y te enviamos fotos como prueba.",
       massTitle: "Intención de misa",
       massText: "Tu intención leída en una misa en la Basílica: un ser querido que partió, un cumpleaños, una sanación, un agradecimiento.",
-      offering: "Ofrenda a la Basílica (tarifa oficial)",
-      massOffering: "desde $150 MXN",
-      fee: "Nuestra tarifa de servicio",
-      tbd: "Por definir",
-      massSrc: "Tarifas oficiales de virgendeguadalupe.org.mx, consultadas el 6 de nov. de 2026. Pueden cambiar.",
       flowersTitle: "Rosas para la Virgen",
       flowersText: "Un ramo de rosas llevado a la Basílica a nombre de tu familia, en recuerdo de las rosas que Juan Diego llevó en su tilma.",
-      flowersCost: "Flores (compradas en CDMX)",
       candleTitle: "Veladora",
       candleText: "Una veladora con el nombre que elijas, por tu petición, colocada en el quematorio del Tepeyac. Te enviamos la foto.",
-      candleCost: "Veladora (comprada en CDMX)",
-      candleSrc: "Los horarios oficiales incluyen bendición de veladoras de lunes a viernes a las 12:15 en el Templo Expiatorio.",
       howEyebrow: "Cómo funciona",
       howTitle: "Cuatro pasos desde tu celular",
       s1t: "Elige un servicio", s1p: "Misa, rosas o veladora. Agrega el nombre y tu intención.",
@@ -717,6 +699,7 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
       cardFoot1: "Guadalupana Digital",
       cardFoot2: "Servicio independiente · sin afiliación con la Basílica",
       cardAlt: "Vista previa de la Tarjeta de Devoción",
+      shopBtn: "Ir a la tienda",
       photoMass: "Foto: misa en la Basílica", photoRoses: "Foto: rosas en la Basílica", photoCandle: "Veladora encendida con una intención personal, en el Tepeyac",
       photoG101: "Foto: la imagen de la Virgen de Guadalupe (usa una foto propia o con derechos)",
       g101Title: "La Morenita, explicada",
@@ -795,6 +778,15 @@ footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
     function bad() { im.remove(); }
     if (im.complete) { im.naturalWidth ? ok() : bad(); }
     else { im.addEventListener("load", ok); im.addEventListener("error", bad); }
+  });
+
+  document.querySelectorAll("[data-store]").forEach(function (a) {
+    var key = a.getAttribute("data-store"), url = STORE_URLS[key];
+    if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; return; }
+    a.addEventListener("click", function () {
+      document.getElementById("svc").value = key;
+      drawCard();
+    });
   });
 
   function renderCountdown() {
