@@ -11,33 +11,45 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: mobile-first single column; gold "resplandor" hero, service rows with transparent price split, a shareable Devotion Card, sticky bottom CTA on phones */
+/* Palette: Guadalupe — mantle turquoise, tunic rose, solar gold, black sash, ash moon, brown skin, angel's wings */
 :root {
-  --bg: #f6f7f4;
+  --guadalupe-manto-turquesa: #1E656D;
+  --guadalupe-tunica-rosa:    #C46D6D;
+  --guadalupe-oro-solar:      #D4AF37;
+  --guadalupe-cinto-negro:    #1A1A1A;
+  --guadalupe-luna-ceniza:    #2D3136;
+  --guadalupe-tez-morena:     #B98A66;
+  --guadalupe-ala-verde:      #2D6A4F;
+  --guadalupe-ala-roja:       #9E2A2B;
+
+  --bg: #f5f7f7;
   --surface: #ffffff;
-  --fg: #16302d;
-  --muted: #4f625f;
-  --line: #d7dfdb;
-  --mantle: #1d5c57;
+  --fg: var(--guadalupe-cinto-negro);
+  --muted: #4a5257;
+  --line: #d8dfe0;
+  --mantle: var(--guadalupe-manto-turquesa);
   --mantle-ink: #ffffff;
-  --gold: #a87914;
-  --gold-soft: #f4ead2;
-  --rose: #b4284a;
-  --hero-bg: #12403c;
+  --gold: var(--guadalupe-oro-solar);
+  --gold-soft: #f3ebe3;               /* light wash of tez morena */
+  --rose: var(--guadalupe-tunica-rosa);
+  --ok: var(--guadalupe-ala-verde);
+  --error: var(--guadalupe-ala-roja);
+  --hero-bg: var(--guadalupe-manto-turquesa);
   --hero-fg: #fbf6e6;
   --font-display: "Gloock", Georgia, "Times New Roman", serif;
   --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0d1c1b; --surface: #142826; --fg: #e8efec; --muted: #a3b5b1; --line: #27403d;
-    --mantle: #3f9a91; --mantle-ink: #04201d; --gold: #e2b54d; --gold-soft: #2c2a17; --rose: #ef6f8c;
-    --hero-bg: #0a2a27; --hero-fg: #fbf6e6; color-scheme: dark;
+    --bg: var(--guadalupe-cinto-negro); --surface: var(--guadalupe-luna-ceniza); --fg: #ecefef; --muted: #aab3b6; --line: #3c4248;
+    --mantle: #4fa3ab; --mantle-ink: #0b1f22; --gold-soft: #33291f; --rose: #d98c8c; --ok: #6fbf97; --error: #e07a7b;
+    --hero-bg: #164c52; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0d1c1b; --surface: #142826; --fg: #e8efec; --muted: #a3b5b1; --line: #27403d;
-  --mantle: #3f9a91; --mantle-ink: #04201d; --gold: #e2b54d; --gold-soft: #2c2a17; --rose: #ef6f8c;
-  --hero-bg: #0a2a27; --hero-fg: #fbf6e6; color-scheme: dark;
+  --bg: var(--guadalupe-cinto-negro); --surface: var(--guadalupe-luna-ceniza); --fg: #ecefef; --muted: #aab3b6; --line: #3c4248;
+  --mantle: #4fa3ab; --mantle-ink: #0b1f22; --gold-soft: #33291f; --rose: #d98c8c; --ok: #6fbf97; --error: #e07a7b;
+  --hero-bg: #164c52; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -55,19 +67,19 @@ a { color: inherit; }
 
 /* Sticky top bar with language switch */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--hero-bg); }
-.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--hero-bg); color: var(--hero-fg); border-bottom: 1px solid rgba(226,181,77,0.25); }
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--hero-bg); color: var(--hero-fg); border-bottom: 1px solid rgba(212,175,55,0.25); }
 .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
 .brand { font-family: var(--font-display); font-size: 1.2rem; text-decoration: none; }
-.brand span { color: #e2b54d; }
+.brand span { color: var(--gold); }
 .lang { display: inline-flex; border: 1px solid rgba(251,246,230,0.4); border-radius: 999px; padding: 3px; }
 .lang button { font: inherit; font-size: 0.85rem; font-weight: 700; padding: 6px 14px; border-radius: 999px; border: 0; background: transparent; color: var(--hero-fg); cursor: pointer; min-height: 36px; }
-.lang button[aria-pressed="true"] { background: #e2b54d; color: #1a1405; }
+.lang button[aria-pressed="true"] { background: var(--gold); color: #1a1405; }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; background: var(--hero-bg); color: var(--hero-fg); isolation: isolate; }
 .hero::before {
   content: ""; position: absolute; inset: -60% -20% auto; height: 220%; z-index: -2;
-  background: repeating-conic-gradient(from 0deg at 50% 62%, rgba(226,181,77,0.20) 0deg 2.2deg, transparent 2.2deg 7deg);
+  background: repeating-conic-gradient(from 0deg at 50% 62%, rgba(212,175,55,0.20) 0deg 2.2deg, transparent 2.2deg 7deg);
   -webkit-mask-image: radial-gradient(circle at 50% 62%, #000 0%, transparent 62%);
           mask-image: radial-gradient(circle at 50% 62%, #000 0%, transparent 62%);
 }
@@ -76,16 +88,16 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath fill='%23e2b54d' d='M20 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM84 70l1.5 4.5 4.5 1.5-4.5 1.5L84 82l-1.5-4.5L78 76l4.5-1.5z'/%3E%3C/svg%3E");
 }
 .hero .wrap { padding-block: 56px 52px; display: grid; gap: 20px; text-align: center; justify-items: center; }
-.hero .eyebrow { color: #e2b54d; }
+.hero .eyebrow { color: var(--gold); }
 .hero h1 { font-size: clamp(2.4rem, 9vw, 5rem); max-width: 14ch; }
-.hero h1 em { font-style: normal; color: #e2b54d; }
+.hero h1 em { font-style: normal; color: var(--gold); }
 .hero .lede { max-width: 54ch; font-size: 1.08rem; color: rgba(251,246,230,0.86); }
 .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 2px solid transparent; font-size: 1rem; cursor: pointer; font-family: var(--font-body); }
-.btn-gold { background: #e2b54d; color: #1a1405; }
+.btn-gold { background: var(--gold); color: #1a1405; }
 .btn-ghost { border-color: rgba(251,246,230,0.5); color: var(--hero-fg); background: transparent; }
 .countdown { font-size: 0.95rem; color: rgba(251,246,230,0.8); font-variant-numeric: tabular-nums; }
-.countdown strong { color: #e2b54d; }
+.countdown strong { color: var(--gold); }
 
 /* Independence strip */
 .indep { background: var(--gold-soft); border-bottom: 1px solid var(--line); }
@@ -121,13 +133,13 @@ section.block .wrap { padding-block: 60px; display: grid; gap: 30px; }
 /* Devotion card */
 .cardzone { background: var(--hero-bg); color: var(--hero-fg); }
 .cardzone .head p { color: rgba(251,246,230,0.8); }
-.cardzone .eyebrow { color: #e2b54d; }
+.cardzone .eyebrow { color: var(--gold); }
 .cardgrid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 32px; align-items: center; }
-.cardgrid img { width: 100%; max-width: 340px; aspect-ratio: 9 / 16; border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.45); background: #0a2a27; display: block; justify-self: center; }
+.cardgrid img { width: 100%; max-width: 340px; aspect-ratio: 9 / 16; border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.45); background: var(--guadalupe-luna-ceniza); display: block; justify-self: center; }
 .cardinfo { display: grid; gap: 18px; min-width: 0; }
 .badges { display: flex; flex-wrap: wrap; gap: 10px; }
-.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(226,181,77,0.6); font-size: 0.88rem; font-weight: 600; }
-.badge b { color: #e2b54d; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(212,175,55,0.6); font-size: 0.88rem; font-weight: 600; }
+.badge b { color: var(--gold); }
 .share { display: flex; flex-wrap: wrap; gap: 10px; }
 .share .btn { min-height: 44px; padding: 10px 18px; font-size: 0.95rem; }
 .sharemsg { font-size: 0.9rem; color: rgba(251,246,230,0.8); min-height: 1.4em; }
@@ -140,6 +152,7 @@ section.block .wrap { padding-block: 60px; display: grid; gap: 30px; }
 .timeline div { position: relative; padding: 0 0 24px 24px; display: grid; gap: 4px; max-width: 62ch; }
 .timeline div::before { content: ""; position: absolute; left: -8px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--gold); }
 .timeline .date { font-weight: 700; color: var(--mantle); }
+.timeline div::before { border-color: var(--guadalupe-tez-morena); }
 
 /* Form */
 .req { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -149,7 +162,8 @@ label { font-weight: 600; font-size: 0.92rem; }
 input, select, textarea { font: inherit; font-size: 16px; min-height: 48px; padding: 11px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; }
 textarea { min-height: 96px; resize: vertical; }
 .btn-mantle { background: var(--mantle); color: var(--mantle-ink); justify-self: start; }
-.result { grid-column: 1 / -1; font-weight: 600; color: var(--mantle); }
+.result { grid-column: 1 / -1; font-weight: 600; color: var(--ok); }
+.result.is-error { color: var(--error); }
 
 /* FAQ */
 .faq { display: grid; border-top: 1px solid var(--line); }
@@ -566,6 +580,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
   }
 
   // ---------- Devotion Card (1080 x 1920, story format) ----------
+  var P = { manto: "#1E656D", rosa: "#C46D6D", oro: "#D4AF37", negro: "#1A1A1A", ceniza: "#2D3136", morena: "#B98A66", verde: "#2D6A4F", roja: "#9E2A2B" };
   var canvas = document.createElement("canvas");
   canvas.width = 1080; canvas.height = 1920;
   var img = document.getElementById("cardImg");
@@ -590,36 +605,36 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
   function drawCard() {
     var ctx = canvas.getContext("2d"), W = 1080, H = 1920, cx = W / 2;
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#0a2a27"); g.addColorStop(1, "#174f4a");
+    g.addColorStop(0, P.ceniza); g.addColorStop(1, P.manto);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     // rays
     ctx.save(); ctx.translate(cx, 760);
     for (var i = 0; i < 72; i++) {
       ctx.rotate(Math.PI * 2 / 72);
-      ctx.fillStyle = i % 2 ? "rgba(226,181,77,0.10)" : "rgba(226,181,77,0.04)";
+      ctx.fillStyle = i % 2 ? "rgba(212,175,55,0.10)" : "rgba(212,175,55,0.04)";
       ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-22, -1300); ctx.lineTo(22, -1300); ctx.closePath(); ctx.fill();
     }
     ctx.restore();
     // stars (deterministic)
-    ctx.fillStyle = "rgba(226,181,77,0.7)";
+    ctx.fillStyle = "rgba(212,175,55,0.75)";
     var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
     for (var j = 0; j < 46; j++) star(ctx, rnd() * W, rnd() * H, 6 + rnd() * 10);
     // frame
-    ctx.strokeStyle = "rgba(226,181,77,0.8)"; ctx.lineWidth = 4;
+    ctx.strokeStyle = P.oro; ctx.lineWidth = 4;
     ctx.strokeRect(48, 48, W - 96, H - 96);
     ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
     // top
     ctx.fillStyle = "#fbf6e6"; ctx.font = "600 44px Figtree, sans-serif";
     ctx.fillText(t("cardTop"), cx, 300);
-    ctx.fillStyle = "#e2b54d"; ctx.font = "150px Gloock, Georgia, serif";
+    ctx.fillStyle = P.oro; ctx.font = "150px Gloock, Georgia, serif";
     ctx.fillText(t("cardPlace"), cx, 460);
     // rose medallion
-    ctx.beginPath(); ctx.arc(cx, 760, 150, 0, Math.PI * 2); ctx.fillStyle = "rgba(10,42,39,0.85)"; ctx.fill();
-    ctx.lineWidth = 6; ctx.strokeStyle = "#e2b54d"; ctx.stroke();
-    ctx.fillStyle = "#ef6f8c";
+    ctx.beginPath(); ctx.arc(cx, 760, 150, 0, Math.PI * 2); ctx.fillStyle = "rgba(26,26,26,0.8)"; ctx.fill();
+    ctx.lineWidth = 6; ctx.strokeStyle = P.oro; ctx.stroke();
+    ctx.fillStyle = P.rosa;
     for (var p = 0; p < 6; p++) { ctx.beginPath(); ctx.ellipse(cx + Math.cos(p * Math.PI / 3) * 34, 740 + Math.sin(p * Math.PI / 3) * 34, 40, 26, p * Math.PI / 3, 0, Math.PI * 2); ctx.fill(); }
-    ctx.fillStyle = "#b4284a"; ctx.beginPath(); ctx.arc(cx, 740, 28, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "#3f9a91"; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(cx, 800); ctx.lineTo(cx, 870); ctx.stroke();
+    ctx.fillStyle = P.roja; ctx.beginPath(); ctx.arc(cx, 740, 28, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = P.verde; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(cx, 800); ctx.lineTo(cx, 870); ctx.stroke();
     // service
     ctx.fillStyle = "#fbf6e6"; fitText(ctx, serviceLabel(), 900, 76, "Gloock, Georgia, serif");
     ctx.fillText(serviceLabel(), cx, 1040);
@@ -627,7 +642,7 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
     ctx.fillStyle = "rgba(251,246,230,0.7)"; ctx.font = "600 36px Figtree, sans-serif";
     ctx.fillText(t("cardFor").toUpperCase(), cx, 1160);
     var forName = val("for") || t("cardForDefault");
-    ctx.fillStyle = "#e2b54d"; fitText(ctx, forName, 900, 72, "Gloock, Georgia, serif");
+    ctx.fillStyle = P.oro; fitText(ctx, forName, 900, 72, "Gloock, Georgia, serif");
     ctx.fillText(forName, cx, 1250);
     ctx.fillStyle = "rgba(251,246,230,0.7)"; ctx.font = "600 36px Figtree, sans-serif";
     ctx.fillText(t("cardFrom").toUpperCase(), cx, 1360);
@@ -638,9 +653,9 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
     var badge = "★ " + t("badge1");
     ctx.font = "700 40px Figtree, sans-serif";
     var bw = ctx.measureText(badge).width + 80;
-    ctx.fillStyle = "#e2b54d";
+    ctx.fillStyle = P.oro;
     ctx.beginPath(); if (ctx.roundRect) { ctx.roundRect(cx - bw / 2, 1530, bw, 84, 42); } else { ctx.rect(cx - bw / 2, 1530, bw, 84); } ctx.fill();
-    ctx.fillStyle = "#1a1405"; ctx.fillText(badge, cx, 1586);
+    ctx.fillStyle = P.negro; ctx.fillText(badge, cx, 1586);
     // footer
     ctx.fillStyle = "#fbf6e6"; ctx.font = "44px Gloock, Georgia, serif";
     ctx.fillText(t("cardFoot1"), cx, 1740);
@@ -677,7 +692,8 @@ footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
   document.getElementById("reqForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var out = document.getElementById("result");
-    if (!val("svc") || !val("name")) { out.textContent = t("fNeed"); return; }
+    if (!val("svc") || !val("name")) { out.classList.add("is-error"); out.textContent = t("fNeed"); return; }
+    out.classList.remove("is-error");
     drawCard();
     out.textContent = t("fDone");
     document.getElementById("card").scrollIntoView();
