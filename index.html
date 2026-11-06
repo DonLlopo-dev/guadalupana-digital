@@ -1,0 +1,679 @@
+<title>Guadalupana Digital</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: mobile-first single column; gold "resplandor" hero, service rows with transparent price split, a shareable Devotion Card, sticky bottom CTA on phones */
+:root {
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --fg: #16302d;
+  --muted: #4f625f;
+  --line: #d7dfdb;
+  --mantle: #1d5c57;
+  --mantle-ink: #ffffff;
+  --gold: #a87914;
+  --gold-soft: #f4ead2;
+  --rose: #b4284a;
+  --hero-bg: #12403c;
+  --hero-fg: #fbf6e6;
+  --font-display: "Gloock", Georgia, "Times New Roman", serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1c1b; --surface: #142826; --fg: #e8efec; --muted: #a3b5b1; --line: #27403d;
+    --mantle: #3f9a91; --mantle-ink: #04201d; --gold: #e2b54d; --gold-soft: #2c2a17; --rose: #ef6f8c;
+    --hero-bg: #0a2a27; --hero-fg: #fbf6e6; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1c1b; --surface: #142826; --fg: #e8efec; --muted: #a3b5b1; --line: #27403d;
+  --mantle: #3f9a91; --mantle-ink: #04201d; --gold: #e2b54d; --gold-soft: #2c2a17; --rose: #ef6f8c;
+  --hero-bg: #0a2a27; --hero-fg: #fbf6e6; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* Sticky top bar with language switch */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--hero-bg); }
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--hero-bg); color: var(--hero-fg); border-bottom: 1px solid rgba(226,181,77,0.25); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.brand { font-family: var(--font-display); font-size: 1.2rem; text-decoration: none; }
+.brand span { color: #e2b54d; }
+.lang { display: inline-flex; border: 1px solid rgba(251,246,230,0.4); border-radius: 999px; padding: 3px; }
+.lang button { font: inherit; font-size: 0.85rem; font-weight: 700; padding: 6px 14px; border-radius: 999px; border: 0; background: transparent; color: var(--hero-fg); cursor: pointer; min-height: 36px; }
+.lang button[aria-pressed="true"] { background: #e2b54d; color: #1a1405; }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; background: var(--hero-bg); color: var(--hero-fg); isolation: isolate; }
+.hero::before {
+  content: ""; position: absolute; inset: -60% -20% auto; height: 220%; z-index: -2;
+  background: repeating-conic-gradient(from 0deg at 50% 62%, rgba(226,181,77,0.20) 0deg 2.2deg, transparent 2.2deg 7deg);
+  -webkit-mask-image: radial-gradient(circle at 50% 62%, #000 0%, transparent 62%);
+          mask-image: radial-gradient(circle at 50% 62%, #000 0%, transparent 62%);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath fill='%23e2b54d' d='M20 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM84 70l1.5 4.5 4.5 1.5-4.5 1.5L84 82l-1.5-4.5L78 76l4.5-1.5z'/%3E%3C/svg%3E");
+}
+.hero .wrap { padding-block: 56px 52px; display: grid; gap: 20px; text-align: center; justify-items: center; }
+.hero .eyebrow { color: #e2b54d; }
+.hero h1 { font-size: clamp(2.4rem, 9vw, 5rem); max-width: 14ch; }
+.hero h1 em { font-style: normal; color: #e2b54d; }
+.hero .lede { max-width: 54ch; font-size: 1.08rem; color: rgba(251,246,230,0.86); }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 2px solid transparent; font-size: 1rem; cursor: pointer; font-family: var(--font-body); }
+.btn-gold { background: #e2b54d; color: #1a1405; }
+.btn-ghost { border-color: rgba(251,246,230,0.5); color: var(--hero-fg); background: transparent; }
+.countdown { font-size: 0.95rem; color: rgba(251,246,230,0.8); font-variant-numeric: tabular-nums; }
+.countdown strong { color: #e2b54d; }
+
+/* Independence strip */
+.indep { background: var(--gold-soft); border-bottom: 1px solid var(--line); }
+.indep .wrap { padding-block: 16px; display: flex; gap: 12px; align-items: flex-start; }
+.indep svg { flex: none; width: 24px; height: 24px; margin-top: 2px; }
+.indep p { font-size: 0.95rem; min-width: 0; }
+
+/* Sections */
+section.block .wrap { padding-block: 60px; display: grid; gap: 30px; }
+.head { display: grid; gap: 10px; max-width: 62ch; }
+.head h2 { font-size: clamp(1.9rem, 6vw, 3rem); }
+.head p { color: var(--muted); }
+
+/* Services */
+.services { display: grid; border-top: 1px solid var(--line); }
+.svc { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+.svc svg { width: 48px; height: 48px; }
+.svc > div { min-width: 0; display: grid; gap: 8px; }
+.svc h3 { font-size: 1.55rem; }
+.svc p { color: var(--muted); }
+.split { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; font-size: 0.92rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-variant-numeric: tabular-nums; }
+.split dt { color: var(--muted); }
+.split dd { margin: 0; font-weight: 600; text-align: right; }
+.split .src { grid-column: 1 / -1; font-size: 0.78rem; color: var(--muted); }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; counter-reset: step; }
+.steps li { counter-increment: step; display: grid; gap: 6px; align-content: start; }
+.steps li::before { content: counter(step); font-family: var(--font-display); font-size: 2.4rem; color: var(--rose); line-height: 1; }
+.steps h3 { font-family: var(--font-body); font-weight: 700; font-size: 1.05rem; }
+.steps p { color: var(--muted); }
+
+/* Devotion card */
+.cardzone { background: var(--hero-bg); color: var(--hero-fg); }
+.cardzone .head p { color: rgba(251,246,230,0.8); }
+.cardzone .eyebrow { color: #e2b54d; }
+.cardgrid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 32px; align-items: center; }
+.cardgrid img { width: 100%; max-width: 340px; aspect-ratio: 9 / 16; border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.45); background: #0a2a27; display: block; justify-self: center; }
+.cardinfo { display: grid; gap: 18px; min-width: 0; }
+.badges { display: flex; flex-wrap: wrap; gap: 10px; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(226,181,77,0.6); font-size: 0.88rem; font-weight: 600; }
+.badge b { color: #e2b54d; }
+.share { display: flex; flex-wrap: wrap; gap: 10px; }
+.share .btn { min-height: 44px; padding: 10px 18px; font-size: 0.95rem; }
+.sharemsg { font-size: 0.9rem; color: rgba(251,246,230,0.8); min-height: 1.4em; }
+.fine { font-size: 0.82rem; color: rgba(251,246,230,0.65); }
+@media (max-width: 720px) { .cardgrid { grid-template-columns: minmax(0, 1fr); } .cardgrid img { max-width: 280px; } }
+
+/* Story */
+.story { background: var(--surface); border-block: 1px solid var(--line); }
+.timeline { display: grid; border-left: 2px solid var(--gold); margin-left: 6px; }
+.timeline div { position: relative; padding: 0 0 24px 24px; display: grid; gap: 4px; max-width: 62ch; }
+.timeline div::before { content: ""; position: absolute; left: -8px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--gold); }
+.timeline .date { font-weight: 700; color: var(--mantle); }
+
+/* Form */
+.req { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+label { font-weight: 600; font-size: 0.92rem; }
+input, select, textarea { font: inherit; font-size: 16px; min-height: 48px; padding: 11px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; }
+textarea { min-height: 96px; resize: vertical; }
+.btn-mantle { background: var(--mantle); color: var(--mantle-ink); justify-self: start; }
+.result { grid-column: 1 / -1; font-weight: 600; color: var(--mantle); }
+
+/* FAQ */
+.faq { display: grid; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); padding-block: 16px; }
+.faq summary { font-weight: 700; cursor: pointer; font-size: 1.05rem; }
+.faq details p { margin-top: 8px; color: var(--muted); max-width: 65ch; }
+
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; padding-bottom: 76px; }
+footer .wrap { padding-block: 32px; display: grid; gap: 8px; }
+
+/* Sticky CTA on phones */
+.mobilecta { display: none; }
+@media (max-width: 720px) {
+  .mobilecta { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 8; background: var(--surface); border-top: 1px solid var(--line);
+    padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+  .mobilecta .btn { width: 100%; background: var(--mantle); color: var(--mantle-ink); }
+}
+@media (min-width: 721px) { footer { padding-bottom: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero::before { animation: turn 120s linear infinite; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Guadalupana <span>Digital</span></a>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button type="button" id="btn-en" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" id="btn-es" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="heroEyebrow"></span>
+    <h1 data-i18n-html="heroTitle"></h1>
+    <p class="lede" data-i18n="heroLede"></p>
+    <div class="btns">
+      <a class="btn btn-gold" href="#request" data-i18n="ctaRequest"></a>
+      <a class="btn btn-ghost" href="#card" data-i18n="ctaCard"></a>
+    </div>
+    <p class="countdown" id="countdown"></p>
+  </div>
+</section>
+
+<div class="indep">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="var(--gold)" stroke-width="2"/><path d="M12 7v6M12 16.5v.5" stroke="var(--gold)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    <p data-i18n-html="indep"></p>
+  </div>
+</div>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="svcEyebrow"></span>
+      <h2 data-i18n="svcTitle"></h2>
+      <p data-i18n="svcLede"></p>
+    </div>
+    <div class="services">
+      <article class="svc">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="none" stroke="var(--mantle)" stroke-width="2.5" stroke-linejoin="round" d="M24 6v8M20 10h8M10 42V24l14-8 14 8v18zM20 42V32h8v10"/></svg>
+        <div>
+          <h3 data-i18n="massTitle"></h3>
+          <p data-i18n="massText"></p>
+          <dl class="split">
+            <dt data-i18n="offering"></dt><dd data-i18n="massOffering"></dd>
+            <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
+            <span class="src" data-i18n="massSrc"></span>
+          </dl>
+        </div>
+      </article>
+      <article class="svc">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="18" r="9" fill="none" stroke="var(--rose)" stroke-width="2.5"/><path fill="none" stroke="var(--rose)" stroke-width="2.5" d="M24 12c-3 3-3 9 0 12M24 27v15M24 34c-5-1-8-4-9-8M24 37c5-1 8-4 9-8"/></svg>
+        <div>
+          <h3 data-i18n="flowersTitle"></h3>
+          <p data-i18n="flowersText"></p>
+          <dl class="split">
+            <dt data-i18n="flowersCost"></dt><dd data-i18n="tbd"></dd>
+            <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
+          </dl>
+        </div>
+      </article>
+      <article class="svc">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round" d="M16 20h16v22H16zM24 6c-3 4-4 7-2 10 1 2 4 2 4 0 2-3 1-6-2-10z"/></svg>
+        <div>
+          <h3 data-i18n="candleTitle"></h3>
+          <p data-i18n="candleText"></p>
+          <dl class="split">
+            <dt data-i18n="candleCost"></dt><dd data-i18n="tbd"></dd>
+            <dt data-i18n="fee"></dt><dd data-i18n="tbd"></dd>
+            <span class="src" data-i18n="candleSrc"></span>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="howEyebrow"></span>
+      <h2 data-i18n="howTitle"></h2>
+    </div>
+    <ol class="steps">
+      <li><h3 data-i18n="s1t"></h3><p data-i18n="s1p"></p></li>
+      <li><h3 data-i18n="s2t"></h3><p data-i18n="s2p"></p></li>
+      <li><h3 data-i18n="s3t"></h3><p data-i18n="s3p"></p></li>
+      <li><h3 data-i18n="s4t"></h3><p data-i18n="s4p"></p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block cardzone" id="card">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="cardEyebrow"></span>
+      <h2 data-i18n="cardTitle"></h2>
+      <p data-i18n="cardLede"></p>
+    </div>
+    <div class="cardgrid">
+      <img id="cardImg" alt="">
+      <div class="cardinfo">
+        <div class="badges">
+          <span class="badge"><b>★</b> <span data-i18n="badge1"></span></span>
+          <span class="badge"><b>✦</b> <span data-i18n="badge2"></span></span>
+          <span class="badge"><b>✿</b> <span data-i18n="badge3"></span></span>
+        </div>
+        <div class="share">
+          <button class="btn btn-gold" type="button" id="shareBtn" data-i18n="shareBtn"></button>
+          <a class="btn btn-ghost" id="waBtn" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-ghost" id="xBtn" target="_blank" rel="noopener">X</a>
+          <button class="btn btn-ghost" type="button" id="copyBtn" data-i18n="copyBtn"></button>
+        </div>
+        <p class="sharemsg" id="shareMsg" role="status"></p>
+        <p class="fine" data-i18n="cardFine"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block story" id="story">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="storyEyebrow"></span>
+      <h2 data-i18n="storyTitle"></h2>
+    </div>
+    <div class="timeline">
+      <div><span class="date" data-i18n="t1d"></span><p data-i18n="t1p"></p></div>
+      <div><span class="date" data-i18n="t2d"></span><p data-i18n="t2p"></p></div>
+      <div><span class="date" data-i18n="t3d"></span><p data-i18n="t3p"></p></div>
+      <div><span class="date" data-i18n="t4d"></span><p data-i18n="t4p"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="request">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-i18n="reqEyebrow"></span>
+      <h2 data-i18n="reqTitle"></h2>
+      <p data-i18n="reqLede"></p>
+    </div>
+    <form class="req" id="reqForm" novalidate>
+      <div class="field"><label for="svc" data-i18n="fService"></label>
+        <select id="svc">
+          <option value="" data-i18n="fChoose"></option>
+          <option value="mass" data-i18n="massTitle"></option>
+          <option value="flowers" data-i18n="flowersTitle"></option>
+          <option value="candle" data-i18n="candleTitle"></option>
+        </select></div>
+      <div class="field"><label for="name" data-i18n="fName"></label><input id="name" autocomplete="name" data-i18n-ph="fNamePh"></div>
+      <div class="field"><label for="for" data-i18n="fFor"></label><input id="for" data-i18n-ph="fForPh"></div>
+      <div class="field"><label for="date" data-i18n="fDate"></label><input id="date" type="date"></div>
+      <div class="field full"><label for="intent" data-i18n="fIntent"></label><textarea id="intent" data-i18n-ph="fIntentPh"></textarea></div>
+      <button class="btn btn-mantle" type="submit" data-i18n="fSubmit"></button>
+      <p class="result" id="result" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">FAQ</span>
+      <h2 data-i18n="faqTitle"></h2>
+    </div>
+    <div class="faq">
+      <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+      <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+      <details><summary data-i18n="q3"></summary><p data-i18n-html="a3"></p></details>
+      <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <strong>Guadalupana Digital</strong>
+  <p data-i18n="footer"></p>
+  <p data-i18n="proto"></p>
+</div></footer>
+
+<div class="mobilecta"><a class="btn" href="#request" data-i18n="ctaRequest"></a></div>
+
+<script>
+(function () {
+  var T = {
+    en: {
+      heroEyebrow: "Guadalupana Digital",
+      heroTitle: "Your faith reaches <em>Tepeyac</em>, even from far away",
+      heroLede: "You grew up with her image on the wall at abuela's house. Now you can send a Mass intention, roses or a veladora to La Morenita in Mexico City, from wherever you live.",
+      ctaRequest: "Request a service",
+      ctaCard: "See your Devotion Card",
+      countdownDays: "<strong>{n} days</strong> until December 12, her feast day",
+      countdownToday: "<strong>Today is December 12.</strong> ¡Feliz día de la Virgen!",
+      indep: "<strong>Independent service.</strong> Guadalupana Digital is not part of, and is not affiliated with, the Basílica de Guadalupe. We pass the Basílica's offering on in full and only charge a fee for our service.",
+      svcEyebrow: "Services",
+      svcTitle: "Send your devotion to the Basílica",
+      svcLede: "For familias in the US who can't travel to CDMX. We handle the paperwork in person and send you photos as proof.",
+      massTitle: "Mass intention",
+      massText: "Your intention read at a Mass at the Basílica: a loved one who passed, a birthday, a healing, a thank-you.",
+      offering: "Basílica offering (official rate)",
+      massOffering: "from $150 MXN",
+      fee: "Our service fee",
+      tbd: "To be defined",
+      massSrc: "Official rates from virgendeguadalupe.org.mx, checked Nov 6, 2026. Rates may change.",
+      flowersTitle: "Roses for La Virgen",
+      flowersText: "A bouquet of roses brought to the Basílica in your family's name, a nod to the roses Juan Diego carried in his tilma.",
+      flowersCost: "Flowers (bought locally)",
+      candleTitle: "Veladora",
+      candleText: "A candle brought to Tepeyac for your petition, with a photo of your veladora and the name you chose.",
+      candleCost: "Veladora (bought locally)",
+      candleSrc: "The official schedule lists a blessing of veladoras Monday to Friday at 12:15 at the Templo Expiatorio.",
+      howEyebrow: "How it works",
+      howTitle: "Four steps from your phone",
+      s1t: "Choose a service", s1p: "Mass, roses or veladora. Add the name and your intention.",
+      s2t: "Pay online", s2p: "One checkout in US dollars: the offering plus our service fee, shown separately.",
+      s3t: "We go to the Basílica", s3p: "Our team in Mexico City handles it in person and takes photos.",
+      s4t: "Get your proof and your card", s4p: "Photos plus a Devotion Card made for your Instagram story.",
+      cardEyebrow: "Your Devotion Card",
+      cardTitle: "Proof you can share",
+      cardLede: "Every order comes with a card sized for Instagram and TikTok stories. Fill in the form below and your card updates live.",
+      badge1: "Digital Pilgrim", badge2: "First intention", badge3: "December 12 devotee",
+      shareBtn: "Share card",
+      copyBtn: "Copy text",
+      shareText: "I sent my devotion to the Basílica de Guadalupe from the US 🌹 #GuadalupanaDigital #LaMorenita",
+      shareNative: "Shared.",
+      shareFallback: "Your browser can't share images from here. Press and hold the card (or right-click) to save it, then post it to your story.",
+      copied: "Text copied. Paste it with your card.",
+      copyFail: "Couldn't copy automatically. Select the text: ",
+      cardFine: "Devotion Cards are issued by Guadalupana Digital as a keepsake. They are not a Basílica document or a blessing certificate.",
+      storyEyebrow: "Her story",
+      storyTitle: "December 1531, on the hill of Tepeyac",
+      t1d: "December 9, 1531", t1p: "The Virgin appears to Juan Diego, an Indigenous man, on the hill of Tepeyac and asks for a church to be built there.",
+      t2d: "The bishop's doubt", t2p: "Bishop Juan de Zumárraga asks for a sign. Juan Diego returns to the hill.",
+      t3d: "December 12, 1531", t3p: "She tells him to gather flowers on the hilltop. He carries roses in his tilma, and when he opens it before the bishop, her image is on the cloth.",
+      t4d: "Today", t4p: "The tilma is kept at the Basílica de Guadalupe in Mexico City, in the temple that opened in 1976. Juan Diego was canonized in 2002.",
+      reqEyebrow: "Request",
+      reqTitle: "Tell us your intention",
+      reqLede: "Demo form: nothing is sent yet. It fills in your Devotion Card so you can see it.",
+      fService: "Service", fChoose: "Choose one",
+      fName: "Your name", fNamePh: "e.g. Daniela Ramírez",
+      fFor: "For whom?", fForPh: "e.g. Abuela Lupita",
+      fDate: "Preferred date",
+      fIntent: "Your intention (English or Spanish)", fIntentPh: "e.g. For my grandmother's health",
+      fSubmit: "Create my card",
+      fNeed: "Choose a service and add your name to continue.",
+      fDone: "Demo only: nothing was sent. Your Devotion Card is ready above.",
+      faqTitle: "Questions",
+      q1: "Are you part of the Basílica de Guadalupe?",
+      a1: "No. Guadalupana Digital is an independent service. We are not part of the Basílica or the Archdiocese of Mexico, and we don't speak for them.",
+      q2: "What exactly do I pay for?",
+      a2: "Two things, shown separately: the Basílica's official offering, which we pass on in full, and our service fee for doing the paperwork in person, buying flowers or candles, and sending your photos.",
+      q3: "Can I do this myself?",
+      a3: "Yes. The Basílica has its own offices and online channels at <a href=\"https://virgendeguadalupe.org.mx/\" target=\"_blank\" rel=\"noopener\">virgendeguadalupe.org.mx</a>. We exist for people who prefer to have someone handle it for them, in English or Spanish, with photo proof.",
+      q4: "Is the Devotion Card an official certificate?",
+      a4: "No. It is a keepsake from Guadalupana Digital to celebrate your intention and share it. It is not issued by the Basílica.",
+      footer: "Independent project bringing the Guadalupan devotion closer to Latinos in the United States. Not affiliated with the Insigne y Nacional Basílica de Santa María de Guadalupe.",
+      proto: "Prototype v2 · services not active yet · fees to be defined.",
+      cardTop: "I sent my devotion to",
+      cardPlace: "TEPEYAC",
+      cardFor: "For",
+      cardFrom: "From",
+      cardForDefault: "My familia",
+      cardFromDefault: "Your name",
+      cardServiceDefault: "Mass intention",
+      cardFoot1: "Guadalupana Digital",
+      cardFoot2: "Independent service · not affiliated with the Basílica",
+      cardAlt: "Devotion Card preview"
+    },
+    es: {
+      heroEyebrow: "Guadalupana Digital",
+      heroTitle: "Tu fe llega al <em>Tepeyac</em>, aunque estés lejos",
+      heroLede: "Creciste con su imagen en la pared de la casa de tu abuela. Ahora puedes enviar una intención de misa, rosas o una veladora a la Morenita en la Ciudad de México, desde donde vivas.",
+      ctaRequest: "Solicitar un servicio",
+      ctaCard: "Ver tu Tarjeta de Devoción",
+      countdownDays: "Faltan <strong>{n} días</strong> para el 12 de diciembre, su fiesta",
+      countdownToday: "<strong>Hoy es 12 de diciembre.</strong> ¡Feliz día de la Virgen!",
+      indep: "<strong>Servicio independiente.</strong> Guadalupana Digital no forma parte de la Basílica de Guadalupe ni está afiliada a ella. Entregamos íntegra la ofrenda a la Basílica y solo cobramos una tarifa por nuestro servicio.",
+      svcEyebrow: "Servicios",
+      svcTitle: "Envía tu devoción a la Basílica",
+      svcLede: "Para familias en EE. UU. que no pueden viajar a la CDMX. Hacemos el trámite en persona y te enviamos fotos como prueba.",
+      massTitle: "Intención de misa",
+      massText: "Tu intención leída en una misa en la Basílica: un ser querido que partió, un cumpleaños, una sanación, un agradecimiento.",
+      offering: "Ofrenda a la Basílica (tarifa oficial)",
+      massOffering: "desde $150 MXN",
+      fee: "Nuestra tarifa de servicio",
+      tbd: "Por definir",
+      massSrc: "Tarifas oficiales de virgendeguadalupe.org.mx, consultadas el 6 de nov. de 2026. Pueden cambiar.",
+      flowersTitle: "Rosas para la Virgen",
+      flowersText: "Un ramo de rosas llevado a la Basílica a nombre de tu familia, en recuerdo de las rosas que Juan Diego llevó en su tilma.",
+      flowersCost: "Flores (compradas en CDMX)",
+      candleTitle: "Veladora",
+      candleText: "Una veladora llevada al Tepeyac por tu petición, con foto de tu veladora y el nombre que elijas.",
+      candleCost: "Veladora (comprada en CDMX)",
+      candleSrc: "Los horarios oficiales incluyen bendición de veladoras de lunes a viernes a las 12:15 en el Templo Expiatorio.",
+      howEyebrow: "Cómo funciona",
+      howTitle: "Cuatro pasos desde tu celular",
+      s1t: "Elige un servicio", s1p: "Misa, rosas o veladora. Agrega el nombre y tu intención.",
+      s2t: "Paga en línea", s2p: "Un solo pago en dólares: la ofrenda y nuestra tarifa, desglosadas.",
+      s3t: "Vamos a la Basílica", s3p: "Nuestro equipo en la CDMX lo hace en persona y toma fotos.",
+      s4t: "Recibe tu prueba y tu tarjeta", s4p: "Fotos y una Tarjeta de Devoción lista para tu historia de Instagram.",
+      cardEyebrow: "Tu Tarjeta de Devoción",
+      cardTitle: "Una prueba para compartir",
+      cardLede: "Cada pedido incluye una tarjeta del tamaño de las historias de Instagram y TikTok. Llena el formulario de abajo y tu tarjeta se actualiza al momento.",
+      badge1: "Peregrino Digital", badge2: "Primera intención", badge3: "Devoto del 12 de diciembre",
+      shareBtn: "Compartir tarjeta",
+      copyBtn: "Copiar texto",
+      shareText: "Envié mi devoción a la Basílica de Guadalupe desde EE. UU. 🌹 #GuadalupanaDigital #LaMorenita",
+      shareNative: "Compartida.",
+      shareFallback: "Tu navegador no puede compartir imágenes desde aquí. Mantén presionada la tarjeta (o clic derecho) para guardarla y súbela a tu historia.",
+      copied: "Texto copiado. Pégalo junto con tu tarjeta.",
+      copyFail: "No se pudo copiar automáticamente. Selecciona el texto: ",
+      cardFine: "Las Tarjetas de Devoción las emite Guadalupana Digital como recuerdo. No son un documento de la Basílica ni un certificado de bendición.",
+      storyEyebrow: "Su historia",
+      storyTitle: "Diciembre de 1531, en el cerro del Tepeyac",
+      t1d: "9 de diciembre de 1531", t1p: "La Virgen se aparece a Juan Diego, un indígena, en el cerro del Tepeyac y le pide que ahí se construya un templo.",
+      t2d: "La duda del obispo", t2p: "El obispo Juan de Zumárraga pide una señal. Juan Diego vuelve al cerro.",
+      t3d: "12 de diciembre de 1531", t3p: "Ella le pide cortar flores en la cumbre. Él lleva rosas en su tilma y, al abrirla ante el obispo, aparece su imagen en la tela.",
+      t4d: "Hoy", t4p: "La tilma se resguarda en la Basílica de Guadalupe, en la Ciudad de México, en el templo inaugurado en 1976. Juan Diego fue canonizado en 2002.",
+      reqEyebrow: "Solicitud",
+      reqTitle: "Cuéntanos tu intención",
+      reqLede: "Formulario de demostración: todavía no envía nada. Llena tu Tarjeta de Devoción para que la veas.",
+      fService: "Servicio", fChoose: "Elige uno",
+      fName: "Tu nombre", fNamePh: "p. ej. Daniela Ramírez",
+      fFor: "¿Para quién?", fForPh: "p. ej. Abuela Lupita",
+      fDate: "Fecha preferida",
+      fIntent: "Tu intención (en inglés o español)", fIntentPh: "p. ej. Por la salud de mi abuela",
+      fSubmit: "Crear mi tarjeta",
+      fNeed: "Elige un servicio y escribe tu nombre para continuar.",
+      fDone: "Solo demostración: no se envió nada. Tu Tarjeta de Devoción está lista arriba.",
+      faqTitle: "Preguntas",
+      q1: "¿Son parte de la Basílica de Guadalupe?",
+      a1: "No. Guadalupana Digital es un servicio independiente. No formamos parte de la Basílica ni de la Arquidiócesis de México, y no hablamos en su nombre.",
+      q2: "¿Qué estoy pagando exactamente?",
+      a2: "Dos cosas, desglosadas: la ofrenda oficial a la Basílica, que entregamos íntegra, y nuestra tarifa por hacer el trámite en persona, comprar flores o veladoras y enviarte las fotos.",
+      q3: "¿Puedo hacerlo yo mismo?",
+      a3: "Sí. La Basílica tiene sus propias oficinas y canales en línea en <a href=\"https://virgendeguadalupe.org.mx/\" target=\"_blank\" rel=\"noopener\">virgendeguadalupe.org.mx</a>. Nosotros existimos para quien prefiere que alguien lo haga por él, en inglés o español y con prueba en fotos.",
+      q4: "¿La Tarjeta de Devoción es un certificado oficial?",
+      a4: "No. Es un recuerdo de Guadalupana Digital para celebrar tu intención y compartirla. No la emite la Basílica.",
+      footer: "Proyecto independiente para acercar la devoción guadalupana a los latinos en Estados Unidos. Sin afiliación con la Insigne y Nacional Basílica de Santa María de Guadalupe.",
+      proto: "Prototipo v2 · servicios aún no activos · tarifas por definir.",
+      cardTop: "Envié mi devoción al",
+      cardPlace: "TEPEYAC",
+      cardFor: "Para",
+      cardFrom: "De",
+      cardForDefault: "Mi familia",
+      cardFromDefault: "Tu nombre",
+      cardServiceDefault: "Intención de misa",
+      cardFoot1: "Guadalupana Digital",
+      cardFoot2: "Servicio independiente · sin afiliación con la Basílica",
+      cardAlt: "Vista previa de la Tarjeta de Devoción"
+    }
+  };
+
+  var lang = "en";
+  try { var saved = localStorage.getItem("gd-lang"); if (saved === "es" || saved === "en") lang = saved; } catch (e) {}
+  function t(k) { return (T[lang] && T[lang][k]) || T.en[k] || ""; }
+
+  function applyLang() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) { el.innerHTML = t(el.getAttribute("data-i18n-html")); });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { el.placeholder = t(el.getAttribute("data-i18n-ph")); });
+    document.getElementById("btn-en").setAttribute("aria-pressed", lang === "en");
+    document.getElementById("btn-es").setAttribute("aria-pressed", lang === "es");
+    var text = encodeURIComponent(t("shareText"));
+    document.getElementById("waBtn").href = "https://wa.me/?text=" + text;
+    document.getElementById("xBtn").href = "https://twitter.com/intent/tweet?text=" + text;
+    renderCountdown();
+    drawCard();
+  }
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      lang = b.getAttribute("data-lang");
+      try { localStorage.setItem("gd-lang", lang); } catch (e) {}
+      applyLang();
+    });
+  });
+
+  function renderCountdown() {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var feast = new Date(today.getFullYear(), 11, 12);
+    if (today > feast) feast = new Date(today.getFullYear() + 1, 11, 12);
+    var days = Math.round((feast - today) / 86400000);
+    document.getElementById("countdown").innerHTML = days === 0 ? t("countdownToday") : t("countdownDays").replace("{n}", days);
+  }
+
+  // ---------- Devotion Card (1080 x 1920, story format) ----------
+  var canvas = document.createElement("canvas");
+  canvas.width = 1080; canvas.height = 1920;
+  var img = document.getElementById("cardImg");
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function serviceLabel() {
+    var v = val("svc");
+    return v === "mass" ? t("massTitle") : v === "flowers" ? t("flowersTitle") : v === "candle" ? t("candleTitle") : t("cardServiceDefault");
+  }
+  function star(ctx, x, y, r) {
+    ctx.beginPath();
+    for (var i = 0; i < 8; i++) {
+      var a = i * Math.PI / 4, rr = i % 2 ? r * 0.35 : r;
+      ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr);
+    }
+    ctx.closePath(); ctx.fill();
+  }
+  function fitText(ctx, text, max, size, family) {
+    var s = size;
+    do { ctx.font = s + "px " + family; s -= 4; } while (ctx.measureText(text).width > max && s > 30);
+  }
+  function drawCard() {
+    var ctx = canvas.getContext("2d"), W = 1080, H = 1920, cx = W / 2;
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#0a2a27"); g.addColorStop(1, "#174f4a");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // rays
+    ctx.save(); ctx.translate(cx, 760);
+    for (var i = 0; i < 72; i++) {
+      ctx.rotate(Math.PI * 2 / 72);
+      ctx.fillStyle = i % 2 ? "rgba(226,181,77,0.10)" : "rgba(226,181,77,0.04)";
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-22, -1300); ctx.lineTo(22, -1300); ctx.closePath(); ctx.fill();
+    }
+    ctx.restore();
+    // stars (deterministic)
+    ctx.fillStyle = "rgba(226,181,77,0.7)";
+    var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    for (var j = 0; j < 46; j++) star(ctx, rnd() * W, rnd() * H, 6 + rnd() * 10);
+    // frame
+    ctx.strokeStyle = "rgba(226,181,77,0.8)"; ctx.lineWidth = 4;
+    ctx.strokeRect(48, 48, W - 96, H - 96);
+    ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    // top
+    ctx.fillStyle = "#fbf6e6"; ctx.font = "600 44px Figtree, sans-serif";
+    ctx.fillText(t("cardTop"), cx, 300);
+    ctx.fillStyle = "#e2b54d"; ctx.font = "150px Gloock, Georgia, serif";
+    ctx.fillText(t("cardPlace"), cx, 460);
+    // rose medallion
+    ctx.beginPath(); ctx.arc(cx, 760, 150, 0, Math.PI * 2); ctx.fillStyle = "rgba(10,42,39,0.85)"; ctx.fill();
+    ctx.lineWidth = 6; ctx.strokeStyle = "#e2b54d"; ctx.stroke();
+    ctx.fillStyle = "#ef6f8c";
+    for (var p = 0; p < 6; p++) { ctx.beginPath(); ctx.ellipse(cx + Math.cos(p * Math.PI / 3) * 34, 740 + Math.sin(p * Math.PI / 3) * 34, 40, 26, p * Math.PI / 3, 0, Math.PI * 2); ctx.fill(); }
+    ctx.fillStyle = "#b4284a"; ctx.beginPath(); ctx.arc(cx, 740, 28, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "#3f9a91"; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(cx, 800); ctx.lineTo(cx, 870); ctx.stroke();
+    // service
+    ctx.fillStyle = "#fbf6e6"; fitText(ctx, serviceLabel(), 900, 76, "Gloock, Georgia, serif");
+    ctx.fillText(serviceLabel(), cx, 1040);
+    // for / from
+    ctx.fillStyle = "rgba(251,246,230,0.7)"; ctx.font = "600 36px Figtree, sans-serif";
+    ctx.fillText(t("cardFor").toUpperCase(), cx, 1160);
+    var forName = val("for") || t("cardForDefault");
+    ctx.fillStyle = "#e2b54d"; fitText(ctx, forName, 900, 72, "Gloock, Georgia, serif");
+    ctx.fillText(forName, cx, 1250);
+    ctx.fillStyle = "rgba(251,246,230,0.7)"; ctx.font = "600 36px Figtree, sans-serif";
+    ctx.fillText(t("cardFrom").toUpperCase(), cx, 1360);
+    var fromName = val("name") || t("cardFromDefault");
+    ctx.fillStyle = "#fbf6e6"; fitText(ctx, fromName, 900, 60, "Figtree, sans-serif");
+    ctx.fillText(fromName, cx, 1440);
+    // badge pill
+    var badge = "★ " + t("badge1");
+    ctx.font = "700 40px Figtree, sans-serif";
+    var bw = ctx.measureText(badge).width + 80;
+    ctx.fillStyle = "#e2b54d";
+    ctx.beginPath(); if (ctx.roundRect) { ctx.roundRect(cx - bw / 2, 1530, bw, 84, 42); } else { ctx.rect(cx - bw / 2, 1530, bw, 84); } ctx.fill();
+    ctx.fillStyle = "#1a1405"; ctx.fillText(badge, cx, 1586);
+    // footer
+    ctx.fillStyle = "#fbf6e6"; ctx.font = "44px Gloock, Georgia, serif";
+    ctx.fillText(t("cardFoot1"), cx, 1740);
+    ctx.fillStyle = "rgba(251,246,230,0.6)"; ctx.font = "500 28px Figtree, sans-serif";
+    ctx.fillText(t("cardFoot2"), cx, 1790);
+    img.src = canvas.toDataURL("image/png");
+    img.alt = t("cardAlt");
+  }
+
+  ["svc", "name", "for"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", drawCard);
+  });
+
+  // Share
+  var msg = document.getElementById("shareMsg");
+  document.getElementById("shareBtn").addEventListener("click", function () {
+    canvas.toBlob(function (blob) {
+      var file = blob && typeof File === "function" ? new File([blob], "devotion-card.png", { type: "image/png" }) : null;
+      if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], text: t("shareText") }).then(function () { msg.textContent = t("shareNative"); }).catch(function () { msg.textContent = t("shareFallback"); });
+      } else {
+        msg.textContent = t("shareFallback");
+      }
+    });
+  });
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var text = t("shareText");
+    try {
+      navigator.clipboard.writeText(text).then(function () { msg.textContent = t("copied"); }, function () { msg.textContent = t("copyFail") + text; });
+    } catch (e) { msg.textContent = t("copyFail") + text; }
+  });
+
+  // Demo form
+  document.getElementById("reqForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var out = document.getElementById("result");
+    if (!val("svc") || !val("name")) { out.textContent = t("fNeed"); return; }
+    drawCard();
+    out.textContent = t("fDone");
+    document.getElementById("card").scrollIntoView();
+  });
+
+  applyLang();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawCard);
+})();
+</script>
