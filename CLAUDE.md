@@ -23,7 +23,7 @@ entrega de rosas y veladoras para quien no puede viajar, y cobramos solo una tar
 - `index.html` — página única bilingüe EN/ES (textos en el objeto `T` del script; claves `data-i18n`).
   Config arriba del script: `var WHATSAPP_NUMBER = "";` (pendiente; formato internacional, solo dígitos).
   También `var STORE_URLS = { mass, flowers, candle }`: enlace de la tienda por servicio (pendiente). Vacío = el botón
-  "Ir a la tienda" baja al formulario con el servicio ya elegido. Los servicios ya no muestran desglose de precios.
+  del servicio ("Ofrecer mi intención", "Llevarle rosas a la Virgen", "Encender mi veladora"; tono no comercial) baja al formulario con el servicio ya elegido. Los servicios ya no muestran desglose de precios.
 - `privacidad.html` — aviso de privacidad EN/ES, BORRADOR con campos `[DATO]` pendientes; requiere abogado.
 - `og-image.png` (1200×630) + etiquetas Open Graph en `<head>`; `og:url` apunta a
   https://donllopo-dev.github.io/guadalupana-digital/ (cambiar si hay dominio propio).
